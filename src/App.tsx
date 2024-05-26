@@ -1,9 +1,10 @@
 import "./App.css";
+import GraphQL from "./GraphQL";
 
 function App() {
   return (
     <>
-      <div>Test</div>
+      <GraphQL />
     </>
   );
 }

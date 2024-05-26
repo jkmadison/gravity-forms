@@ -10,12 +10,11 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-const host = import.meta.env.VITE_API_HOST;
-const token = import.meta.env.VITE_API_TOKEN;
+const host = import.meta.env.VITE_GRAPHQL_URL;
 
 const authLink = setContext((_, { headers }) => {
   return {
-    headers: { ...headers, authorization: token ? `Bearer ${token}` : "" },
+    headers: { ...headers },
   };
 });
 
