@@ -9,9 +9,12 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
     ...field,
     id: field.id.toString(),
   }));
-
   const schema = generateSchema(formFields);
-  const { register, handleSubmit, formState } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isDirty },
+  } = useForm({
     resolver: zodResolver(schema),
   });
 
@@ -19,12 +22,10 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
     console.log(data);
   });
 
-  console.log(formState.errors);
-
   return (
-    <div>
+    <div className=" max-w-screen-sm mx-auto space-y-10">
       <form
-        style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+        className="flex flex-col gap-8 bg-white p-8 rounded-lg shadow-md"
         onSubmit={submitHandler}
       >
         {formFields.map((field) => {
@@ -33,7 +34,7 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
               <Text
                 key={field.id}
                 field={field}
-                errors={formState.errors}
+                errors={errors}
                 {...register(field.id)}
               />
             );
@@ -43,7 +44,7 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
               <Email
                 key={field.id}
                 field={field}
-                errors={formState.errors}
+                errors={errors}
                 {...register(field.id)}
               />
             );
@@ -52,6 +53,10 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
         })}
         <button type="submit">Submit</button>
       </form>
+      <div className="flex gap-4">
+        <p>{`[Is Valid: ${isValid}]`}</p>
+        <p>{`[Is Dirty: ${isDirty}]`}</p>
+      </div>
     </div>
   );
 }

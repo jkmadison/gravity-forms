@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 const Email = forwardRef<any, any>(
   ({ field, errors, onChange, onBlur, name }, ref) => {
     return (
-      <div key={field.id} style={{ display: "flex", flexDirection: "column" }}>
+      <div key={field.id} className="flex flex-col items-start">
         <label>{field.label}</label>
         <input
           type="text"
@@ -16,6 +16,7 @@ const Email = forwardRef<any, any>(
           style={{
             border: errors[field.id] ? "1px solid red" : "1px solid black",
           }}
+          className="p-2 border rounded-md w-full"
         />
         <ErrorMessage errors={errors} name={field.id} />
       </div>
