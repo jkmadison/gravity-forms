@@ -30,6 +30,12 @@ export const generateSchema = (formFields: any[]) => {
           type: z.string().nullable(),
         });
         break;
+      case "SELECT":
+        schemas.push({
+          name: field.id,
+          type: z.string().nullable(),
+        });
+        break;
       default:
     }
   }

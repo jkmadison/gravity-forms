@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 const Radio = forwardRef<any, any>(
   ({ field, errors, onBlur, onChange, name }, ref) => {
     return (
-      <div key={field.id}>
+      <div>
         <label className="flex-1">{field.label}</label>
         <div className="flex items-center gap-8">
           {field.choices.map((choice: any) => (

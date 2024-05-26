@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 const Text = forwardRef<any, any>(
   ({ field, errors, onBlur, onChange, name }, ref) => {
     return (
-      <div key={field.id} className="flex flex-col items-start">
+      <div className="flex flex-col items-start">
         <label>{field.label}</label>
         <input
           type="text"

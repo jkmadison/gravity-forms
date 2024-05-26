@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { CONTACT_FORM } from "./queries/contactForm";
+import { RESIDENTIAL_QUOTE_FORM } from "./queries/contactForm";
 import Form from "./components/form/Form";
 
 export default function GraphQL() {
-  const { loading, error, data } = useQuery(CONTACT_FORM, {
+  const { loading, error, data } = useQuery(RESIDENTIAL_QUOTE_FORM, {
     variables: { limit: 100 },
   });
 
