@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { CONTACT_FORM } from "./queries/contactForm";
+import Form from "./components/form/Form";
 
 export default function GraphQL() {
   const { loading, error, data } = useQuery(CONTACT_FORM, {
@@ -14,17 +15,5 @@ export default function GraphQL() {
     return <p>Error: {error.message}</p>;
   }
 
-  console.log(data);
-
-  return (
-    <ul>
-      {data.books.map((item: any) => {
-        return (
-          <li key={item.id}>
-            <a href="#">{item.name}</a>
-          </li>
-        );
-      })}
-    </ul>
-  );
+  return <Form formFields={data?.gfForm?.formFields?.nodes} />;
 }
