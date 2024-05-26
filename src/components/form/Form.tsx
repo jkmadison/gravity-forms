@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Text from "./Text";
 import Email from "./Email";
 import Radio from "./Radio";
+import Phone from "./Phone";
 
 export default function Form({ formFields: rawFields }: { formFields: any[] }) {
   const formFields = rawFields.map((field) => ({
@@ -53,6 +54,16 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
           if (field.type === "RADIO") {
             return (
               <Radio
+                key={field.id}
+                field={field}
+                errors={errors}
+                {...register(field.id)}
+              />
+            );
+          }
+          if (field.type === "PHONE") {
+            return (
+              <Phone
                 key={field.id}
                 field={field}
                 errors={errors}

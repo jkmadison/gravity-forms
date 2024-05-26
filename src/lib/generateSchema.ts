@@ -10,6 +10,14 @@ export const generateSchema = (formFields: any[]) => {
           type: z.string().min(1, field.errorMessage),
         });
         break;
+      case "PHONE":
+        schemas.push({
+          name: field.id,
+          type: z
+            .string()
+            .regex(/^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/, field.errorMessage),
+        });
+        break;
       case "EMAIL":
         schemas.push({
           name: field.id,
