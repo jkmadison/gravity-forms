@@ -16,6 +16,12 @@ export const generateSchema = (formFields: any[]) => {
           type: z.string().email(field.errorMessage),
         });
         break;
+      case "RADIO":
+        schemas.push({
+          name: field.id,
+          type: z.string().nullable(),
+        });
+        break;
       default:
     }
   }
