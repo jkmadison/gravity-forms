@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { generateSchema } from "../../lib/generateSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Text from "./Text";
@@ -6,7 +6,7 @@ import Email from "./Email";
 import Radio from "./Radio";
 import Phone from "./Phone";
 import Section from "./Section";
-import Select from "./Select";
+import Select from "./CustomSelect";
 
 export default function Form({ formFields: rawFields }: { formFields: any[] }) {
   const formFields = rawFields.map((field) => ({
@@ -16,6 +16,7 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
   const schema = generateSchema(formFields);
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isValid, isDirty },
   } = useForm({
@@ -78,11 +79,29 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
           }
           if (field.type === "SELECT") {
             return (
-              <Select
+              <Controller
+                control={control}
                 key={field.id}
-                field={field}
-                errors={errors}
-                {...register(field.id)}
+                name={field.id}
+                render={({ field: renderField }) => (
+                  <Select
+                    field={{
+                      ...field,
+                      choices: [
+                        {
+                          text: "Option 1",
+                          value: "option1",
+                        },
+                        {
+                          text: "Option 2",
+                          value: "option2",
+                        },
+                      ],
+                    }}
+                    errors={errors}
+                    {...renderField}
+                  />
+                )}
               />
             );
           }

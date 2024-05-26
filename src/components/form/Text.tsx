@@ -13,10 +13,9 @@ const Text = forwardRef<any, any>(
           onBlur={onBlur}
           name={name}
           ref={ref}
-          style={{
-            border: errors[field.id] ? "1px solid red" : "1px solid black",
-          }}
-          className="p-2 border rounded-md w-full"
+          className={`block border flex-1 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 rounded-md w-full ring-gray-300 ${
+            errors[field.id] ? "border-red-500" : "border-gray-300"
+          }`}
         />
         <ErrorMessage errors={errors} name={field.id} />
       </div>
