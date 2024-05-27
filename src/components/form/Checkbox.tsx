@@ -5,13 +5,14 @@ const Checkbox = forwardRef<any, any>((props, ref) => {
   return (
     <div className="space-x-2">
       <input
+        id={field.id}
         name={name}
         onChange={onChange}
         onBlur={onBlur}
         ref={ref}
         type="checkbox"
       />
-      <label>{field.label}</label>
+      <label htmlFor={field.id}>{field.label}</label>
     </div>
   );
 });

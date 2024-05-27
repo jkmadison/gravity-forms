@@ -8,6 +8,8 @@ import Phone from "./Phone";
 import Section from "./Section";
 import Select from "./CustomSelect";
 import Checkbox from "./Checkbox";
+import { CheckCircleIcon } from "@heroicons/react/20/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 
 export default function Form({ formFields: rawFields }: { formFields: any[] }) {
   const formFields = rawFields.map((field) => ({
@@ -19,7 +21,7 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
     register,
     control,
     handleSubmit,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid },
   } = useForm({
     resolver: zodResolver(schema),
   });
@@ -34,6 +36,7 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
         className="flex flex-col gap-8 bg-white p-8 rounded-lg shadow-md"
         onSubmit={submitHandler}
       >
+        <h1 className="font-semibold text-3xl">Test form</h1>
         {formFields.map((field) => {
           if (field.type === "SECTION") {
             return <Section key={field.id} />;
@@ -109,15 +112,32 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
           return null;
         })}
         <Checkbox
-          field={{ label: "Subscribe to our newsletter" }}
+          field={{ label: "Subscribe to our newsletter", id: "123" }}
           {...register("123")}
         />
-        <button type="submit">Submit</button>
+        <div className="flex gap-4">
+          <p className="flex items-center flex-1 gap-6">
+            <span>Is Valid: </span>
+            {isValid ? (
+              <CheckCircleIcon className="h-5 inline-block text-green-600" />
+            ) : (
+              <ExclamationCircleIcon className="h-5 inline-block text-red-600" />
+            )}
+          </p>
+          <button
+            className="bg-gray-400 self-end px-4 py-1.5 text-white rounded-md"
+            type="reset"
+          >
+            Reset
+          </button>
+          <button
+            className="bg-blue-500 self-end px-4 py-1.5 text-white rounded-md"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </form>
-      <div className="flex gap-4">
-        <p>{`[Is Valid: ${isValid}]`}</p>
-        <p>{`[Is Dirty: ${isDirty}]`}</p>
-      </div>
     </div>
   );
 }
