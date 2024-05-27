@@ -7,6 +7,7 @@ import Radio from "./Radio";
 import Phone from "./Phone";
 import Section from "./Section";
 import Select from "./CustomSelect";
+import Checkbox from "./Checkbox";
 
 export default function Form({ formFields: rawFields }: { formFields: any[] }) {
   const formFields = rawFields.map((field) => ({
@@ -107,6 +108,10 @@ export default function Form({ formFields: rawFields }: { formFields: any[] }) {
           }
           return null;
         })}
+        <Checkbox
+          field={{ label: "Subscribe to our newsletter" }}
+          {...register("123")}
+        />
         <button type="submit">Submit</button>
       </form>
       <div className="flex gap-4">

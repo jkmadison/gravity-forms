@@ -1,7 +1,9 @@
 import { z } from "zod";
 
 export const generateSchema = (formFields: any[]) => {
-  const schemas = [];
+  const schemas: { name: any; type: any }[] = [
+    { name: 123, type: z.boolean().optional() },
+  ];
   for (const field of formFields) {
     switch (field.type) {
       case "TEXT":
